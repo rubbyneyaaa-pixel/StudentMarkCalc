@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f7fb">
+  <meta name="description" content="Calculate student marks, grades, and results with a simple student marks calculator.">
+  <title>Student Marks Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="page-header">
+      <div class="brand-mark" aria-hidden="true">SM</div>
+      <div>
+        <p class="eyebrow">STUDENT TOOLS</p>
+        <h1>Student Marks Calculator</h1>
+        <p class="intro">Enter your details and subject marks to see your result.</p>
+      </div>
+    </header>
+
+    <section class="panel calculator-panel" aria-labelledby="calculator-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">YOUR DETAILS</p>
+          <h2 id="calculator-heading">Enter student information</h2>
+        </div>
+        <span class="marks-note">Marks are out of 100</span>
+      </div>
+
+      <form id="marks-form" novalidate>
+        <div class="student-fields">
+          <label class="field" for="student-name">
+            <span>Student Name</span>
+            <input id="student-name" name="studentName" type="text" autocomplete="name" placeholder="e.g. Alex Johnson" required>
+          </label>
+          <label class="field" for="register-number">
+            <span>Register Number</span>
+            <input id="register-number" name="registerNumber" type="text" autocomplete="off" placeholder="e.g. 2026CS001" required>
+          </label>
+        </div>
+
+        <fieldset class="subjects">
+          <legend>Subject marks</legend>
+          <div class="subject-grid">
+            <label class="field" for="english">
+              <span>English</span>
+              <div class="mark-input">
+                <input id="english" name="english" type="number" min="0" max="100" step="1" inputmode="numeric" placeholder="0–100" required>
+                <span aria-hidden="true">/ 100</span>
+              </div>
+            </label>
+            <label class="field" for="mathematics">
+              <span>Mathematics</span>
+              <div class="mark-input">
+                <input id="mathematics" name="mathematics" type="number" min="0" max="100" step="1" inputmode="numeric" placeholder="0–100" required>
+                <span aria-hidden="true">/ 100</span>
+              </div>
+            </label>
+            <label class="field" for="computer-science">
+              <span>Computer Science</span>
+              <div class="mark-input">
+                <input id="computer-science" name="computerScience" type="number" min="0" max="100" step="1" inputmode="numeric" placeholder="0–100" required>
+                <span aria-hidden="true">/ 100</span>
+              </div>
+            </label>
+            <label class="field" for="computer-networks">
+              <span>Computer Networks</span>
+              <div class="mark-input">
+                <input id="computer-networks" name="computerNetworks" type="number" min="0" max="100" step="1" inputmode="numeric" placeholder="0–100" required>
+                <span aria-hidden="true">/ 100</span>
+              </div>
+            </label>
+            <label class="field" for="database-management">
+              <span>Database Management Systems</span>
+              <div class="mark-input">
+                <input id="database-management" name="databaseManagement" type="number" min="0" max="100" step="1" inputmode="numeric" placeholder="0–100" required>
+                <span aria-hidden="true">/ 100</span>
+              </div>
+            </label>
+          </div>
+        </fieldset>
+
+        <p id="form-error" class="message error-message" role="alert" hidden></p>
+        <div class="form-actions">
+          <button class="button button-primary" type="submit">Calculate Result</button>
+          <button class="button button-secondary" id="save-result" type="button" disabled>Save Result</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="result-section" class="panel result-panel" aria-labelledby="result-heading" aria-live="polite" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">CALCULATION</p>
+          <h2 id="result-heading">Your result</h2>
+        </div>
+        <span id="result-badge" class="result-badge"></span>
+      </div>
+      <p id="result-student" class="result-student"></p>
+      <div class="result-grid">
+        <div class="result-stat"><span>Total Marks</span><strong id="total-marks"></strong><small>out of 500</small></div>
+        <div class="result-stat"><span>Average</span><strong id="average-marks"></strong><small>marks per subject</small></div>
+        <div class="result-stat"><span>Percentage</span><strong id="percentage"></strong><small>overall score</small></div>
+        <div class="result-stat"><span>Grade</span><strong id="grade"></strong><small>based on percentage</small></div>
+      </div>
+    </section>
+
+    <section class="panel saved-panel" aria-labelledby="saved-heading">
+      <div class="section-heading saved-heading">
+        <div>
+          <p class="eyebrow">BROWSER DATABASE</p>
+          <h2 id="saved-heading">Saved students</h2>
+          <p class="section-description">Stored in this browser; records are not synced to other devices.</p>
+        </div>
+        <button class="button button-danger-outline" id="clear-records" type="button">Clear All Records</button>
+      </div>
+      <p id="storage-message" class="message" role="status" hidden></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Student Name</th>
+              <th scope="col">Register Number</th>
+              <th scope="col">Total</th>
+              <th scope="col">Percentage</th>
+              <th scope="col">Grade</th>
+              <th scope="col">Result</th>
+              <th scope="col"><span class="visually-hidden">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody id="saved-students"></tbody>
+        </table>
+        <p id="empty-state" class="empty-state">No saved students yet. Calculate and save a result to get started.</p>
+      </div>
+    </section>
+
+    <footer class="page-footer">Records are saved in this browser's database and are not sent anywhere.</footer>
+  </main>
+</body>
+</html>
